@@ -25,17 +25,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
-                .antMatchers("/user/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                .antMatchers("/api/admin/**").hasRole("ADMIN")  // для REST API
+                .antMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/", "/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().successHandler(successUserHandler)
-                .permitAll()
+                .httpBasic()  // для REST-аутентификации
                 .and()
-                .logout()
-                .permitAll();
+                .formLogin().disable()  // отключаем форму логина
+                .logout().disable();  // отключаем форму логаута
     }
 
     @Override

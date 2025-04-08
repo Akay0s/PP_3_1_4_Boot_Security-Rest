@@ -53,12 +53,6 @@ public class AdminRestController {
         userService.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
-//    {
-//        "userName" : "Konstantin",
-//            "password" : "hello123",
-//            "email" : "konstantin@mail.ru",
-//            "roles" : "ROLE_ADMIN"
-//    }
 
     // Редактировать пользователя
     @GetMapping("/edit/{id}")

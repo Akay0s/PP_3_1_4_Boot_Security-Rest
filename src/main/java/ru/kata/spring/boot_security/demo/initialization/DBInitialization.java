@@ -36,14 +36,14 @@ public class DBInitialization {
 
         User admin = new User();
         admin.setUserName("admin");
-        admin.setPassword(passwordEncoder.encode("admin123"));
+        admin.setPassword("admin123");
         admin.setEmail("admin@example.com");
         admin.setRoles(Collections.singleton(adminRole));
         userService.save(admin);
 
         User user = new User();
         user.setUserName("user");
-        user.setPassword(passwordEncoder.encode("user123"));
+        user.setPassword("user123");
         user.setEmail("user@example.com");
         user.setRoles(Collections.singleton(userRole));
         userService.save(user);
