@@ -24,7 +24,7 @@ public class DBInitialization {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @PostConstruct
+    //@PostConstruct
     public void init() {
         Role adminRole = new Role();
         adminRole.setName("ROLE_ADMIN");
