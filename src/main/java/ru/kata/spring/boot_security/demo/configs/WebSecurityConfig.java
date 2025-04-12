@@ -27,15 +27,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/admin/**").hasRole("ADMIN")  // для REST API
-                .antMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/", "/login").permitAll()
+                .antMatchers("/api/**").hasAuthority("ADMIN")
+                .antMatchers("/api/**").hasAnyAuthority("ADMIN", "USER")
                 .anyRequest().authenticated()
                 .and()
-                .httpBasic()  // для REST-аутентификации
+                .formLogin().successHandler(successUserHandler)
+                .permitAll()
                 .and()
-                .formLogin().disable()  // отключаем форму логина
-                .logout().disable();  // отключаем форму логаута
+                .logout()
+                .permitAll();
     }
 
     @Override

@@ -11,7 +11,7 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 import java.security.Principal;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api")
 public class UserRestController {
 
     private final UserService userService;
@@ -20,16 +20,8 @@ public class UserRestController {
         this.userService = userService;
     }
 
-    @GetMapping
+    @GetMapping("/user")
     public ResponseEntity<User> getUser(Principal principal) {
-        if (principal == null || principal.getName() == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-        User user = userService.findUserByUsername(principal.getName());
-        if (user != null) {
-            return ResponseEntity.ok(user);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+        return new ResponseEntity<>(userService.findUserByUsername(principal.getName()), HttpStatus.OK);
     }
 }
