@@ -21,7 +21,7 @@ public class DBInitialization {
         this.roleService = roleService;
     }
 
-    //@PostConstruct
+    @PostConstruct
     public void initUsers() {
         Role adminRole = new Role(1L, "ADMIN");
         Role userRole = new Role(2L, "USER");
